@@ -269,16 +269,20 @@ export class PatientListComponent implements OnInit, OnChanges {
   }
   trackActionForAnalytics(eventname: any) {
     // Send data to Google Analytics
-   this.googleAnalyticsService.sendAnalytics('Registration',eventname,'Registration')
+    this.googleAnalyticsService.sendAnalytics('Registration',eventname,'Registration')
   }
 
   togglePatientTypeList(type) {
     const currentUrl = this.router.url.split("?")[0];
     const params = this.router.url.split("?")[1];
     this.isTabularList = type === "tabular" ? true : false;
+    console.log("Toggling Patient List to: ", type);
+    console.log("Current URL: ", currentUrl);
+    console.log("Updated isTabularList: ", this.isTabularList);
     this.store.dispatch(
       go({ path: [currentUrl], query: { queryParams: { list: type } } })
     );
+    console.log("Updated URL: ", this.router.url);
   }
 
   getPaymentTypeSelected(event: any) {
